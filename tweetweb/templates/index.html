@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TweeTINT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- resources for project demos //-->
+    <link rel="stylesheet" media="all" href="static/tabs.css" />
+    <script type='text/javascript' src='../static/jquery.hashchange.min.js'></script>
+    <script type='text/javascript' src='../static/jquery.easytabs.min.js'></script>
+     <script type='text/javascript' src='../static/jquery-1.7.1.min.js'></script>
+  </head>
+  <!-- <body style="background-image: url(../images/uschome.jpg); background-size:100%; background-repeat: no-repeat; background-position: center center; background-attachment: scroll; background-position: 0% 0%; color: white;"> -->
+
+  <body>
+
+    <div class="container">
+<!-- {% extends "base.html" %} -->
+{% block content %}
+<div id="loading">
+  <img id="loading-image" src="../images/big-ajax-loader.gif" alt="Loading..." />
+</div>
+<style>
+div #menu
+{
+  border:2px solid #a1a1a1;
+  padding:10px 20px; 
+  border-radius:15px;
+}
+</style>
+
+<h1>Welcome to TweeTINT!</h2>
+<br>
+<p>Click <a href="/logout">here</a> to logout.</p>
+<br><br>
+<form action="" method="post">
+  <input type="text" placeholder="Enter Keyword Here..." name="keyword" value="{{request.form.keyword }}">
+  <input class="btn btn-default" type="submit" value="Search">
+</form>
+<br><br>
+
+<h3>You searched for: {{ keyword }}</h3>
+
+<!-- dynamic tab container -->
+<!-- <div id="twitter-bootstrap-container>">
+  <div id="twitter-bootstrap-tabs" data-easytabs="true>
+    <ul class="nav nav-tabs">
+      ::before
+      <li class="active">
+        <a href="#tweet-text" class="active">Tweets</a>
+      </li>
+      <li class>
+        <a href="#tweet-sentiment">Sentiment</a>
+      </li>
+      <li class>
+        <a href="#tweet-htfrequency">Hashtag</a>
+      </li>
+      <li>
+        <a href="#sentiment-rank">Popularity</a>
+      </li>
+      <li>
+        <a href="#tweet-locale">Country</a>
+      </li>
+      ::after
+    </ul>
+    <div class="panels">
+      <div id="twitter-text" class="active" style="display:block; position: static; visibility: visible;">
+        <p> Placeholder for all the tweets retrieved </p>
+      </div>
+      <div id="twitter-sentiment" style="display: none; position: static; visibility: visible;" class>
+        <p> Placeholder for the sentiment chart </p>
+      </div>
+ -->
+
+
+<div id="twitter-bootstrap-container">
+<div id="twitter-bootstrap-tabs" data-easytabs="true">
+ <ul class="nav nav-tabs">
+  <li class="active"><a href="#twitter-home">Home</a></li>
+  <li><a href="#twitter-profile">Profile</a></li>
+  <li><a href="#twitter-messages">Messages</a></li>
+  <li><a href="#twitter-settings">Settings</a></li>
+  <li><a href="#twitter-contact">Contact</a></li>
+ </ul>
+ <div class="panels">
+  <div id="twitter-home" class="active" style="display: block;">
+   <p>Placeholder for all the tweets retrieved.</p>
+  </div>
+  <div id="twitter-profile" style="display: none;">
+   <p>Placeholder for the sentiment chart</p>
+  </div>
+  <div id="twitter-messages" style="display: none;">
+   <p>Placeholder for hashtag frequency</p>
+  </div>
+  <div id="twitter-settings" style="display: none;">
+   <p>Placeholder for snetiment analysis and rankings</p>
+  </div>
+  <div id="twitter-contact" style="display: none;">
+   <p>Placeholder for tweets locale</p>
+  </div>
+ </div>
+</div>
+</div>
+
+
+
+{% for tweet in tweet_content %}
+  {{ tweet.text }} <br>
+  <strong>Date:</strong> {{ tweet.date }} <br>
+<br>
+{% endfor %}
+<br>
+
+<h3>HashTag Frequency</h3>
+{%  for hashtag in hash_frequency %}
+  <strong>#</strong>{{hashtag[0]}} <span> - </span> 
+  <strong>{{hashtag[1]}}</strong>
+  <br>
+{% endfor %}
+<br>
+
+<div class='matplotlib'>
+	<h3>Sentiment Distribution</h3>
+ 	<img src="static/temp/{{plotPng}}">
+</div>
+
+
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.2.js"></script>
+<div id="fig01"></div>
+<script type="text/javascript">
+
+  mpld3.draw_figure("fig01", {{json01|tojson}});
+  mpld3.save_html(draw_figure("fig01", {{json01|tojson}}), graph.html);
+</script>
+
+<script type="text/javascript">
+  $(document).ready( function() {
+    $('#twitter-bootstrap-tabs').easytabs();
+  });
+</script>
+
+<script language="javascript" type="text/javascript">
+  $(window).load(function() {
+    $('#loading').hide();
+  });
+</script>
+
+{% endblock %}
+
+   </div>
+
+  </body>
+</html>
