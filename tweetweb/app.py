@@ -22,9 +22,9 @@ import tempfile
 # import random
 import json
 #Alchemy API
-import os
-cwd = os.getcwd()
-os.chdir('/Users/jasonlin/Desktop/alchemyapi_python/')
+# import os
+# cwd = os.getcwd()
+# os.chdir('/Users/jasonlin/Desktop/alchemyapi_python/')
 from alchemyapi import AlchemyAPI as alcapi
 
 ALCAPI = alcapi() 
@@ -41,7 +41,7 @@ app = Flask(__name__)
 
 #need a secret key for sessions to work properly
 app.secret_key = "my precious"
-app.database = "sample.db"
+# app.database = "sample.db"
 
 # login required decorator
 def login_required(f):
