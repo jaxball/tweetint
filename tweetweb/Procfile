@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: python tweetweb/app.py runserver 0.0.0.0:$PORT --noreload
