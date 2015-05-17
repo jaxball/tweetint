@@ -60,11 +60,6 @@ def login_required(f):
 def home():
 	# return "TweeTINT - A twitter sentiment analysis webapp"
 	# g is an object specific to flask that resets after each request
-	g.db = connect_db()
-	cur = g.db.execute('select * from posts')
-	posts = [dict(title=row[0], description=row[1]) for row in cur.fetchall()]
-	# flash(type(row))
-	g.db.close()
 	tweets = {}
 	keyword = ""
 	bins=np.histogram(np.hstack((-1,1)), bins=20)[1]
