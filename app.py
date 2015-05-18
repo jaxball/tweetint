@@ -43,10 +43,6 @@ app = Flask(__name__)
 app.secret_key = "my precious"
 # app.database = "sample.db"
 
-@failsafe
-def create_app():
-	from routes import app
-	return app
 
 # login required decorator
 def login_required(f):
