@@ -11,31 +11,25 @@ A project for TINT, the no.1 company in listening to users' feedback and needs
 
 ---
 
-> static
->
-	> temp
-		> graph_empty.png
-	bootstrap.min.css
-	jquery-1.7.1.min.js
-	jquery.easytabs.js
-	jquery.hashchange.js
-	tabs.css
-	loader.gif
-> templates
-> 
-	> index.html
-	> login.html
-	> welcome.html
-	> base.html
-> Procfile
-> 
-> requirements.txt
-> 
-> alchemyapi.py
-> 
-> api_key.txt
-> 
-> **app.py**
+	> static
+		> temp
+			> graph_empty.png
+		> bootstrap.min.css
+		> jquery-1.7.1.min.js
+		> jquery.easytabs.js
+		> jquery.hashchange.js
+		> tabs.css
+		> loader.gif
+	> templates 
+		> index.html
+		> login.html
+		> welcome.html
+		> base.html
+	> Procfile 
+	> requirements.txt
+	> alchemyapi.py
+	> api_key.txt
+	> **app.py**
 
 **Frameworks & Libraries**
 
@@ -47,9 +41,10 @@ To build the web app, a local python app was built first. All features and funct
 
 ---
 
-> app.py
-
-> *textsearch.txt
+	> app.py
+	> *textsearch.txt
+	> alchemyapi.py
+	> api_key.txt
 
 #####Twitter Mining####
 Using the REST API
@@ -70,21 +65,17 @@ AlchemyAPI is a very powerful cloud Artifical Intelligence engine that supports 
 
 ---
 
-> index.html
-> 
-> login.html
-> 
-> welcome.html
-> 
-> bootstrap.min.js
-> 
-> jquery-1.7.1.min.js
-> 
-> jquery.easytabs.js
-> 
-> tabs.css
-> 
-> loader.gif
+	> templates
+		> index.htm 
+		> login.html
+		> welcome.html
+		> base.html
+	> static
+		> bootstrap.min.js 
+		> jquery-1.7.1.min.js
+		> jquery.easytabs.js
+		> tabs.css
+		> loader.gif
 
 #####Flask#####
 Flask is a Python framework that encapsulates the processes and procedures for hosting HTML content from python programs as well as making HTML requests that respond with feedback. It is the primary framework I used to port the app online.
