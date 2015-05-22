@@ -62,7 +62,7 @@ def home():
 		auth.set_access_token(access_token, access_token_secret)
 		api = API(auth)
 		#This line filter Twitter Streams to capture data input by user
-		tweets = api.search(q=str(query), count=10)
+		tweets = api.search(q=str(query), count=15)
 		tweet_hash={}
 		# output = open("search_results.txt", "w")
 		scores = []

@@ -49,10 +49,10 @@ To build the web app, a local python app was built first. All features and funct
 #####Twitter Mining####
 Using the REST API
 
-**Streaming** 
+***Streaming*** 
 - I have initially built my app off streaming live data from Twitter pertinent to keyword query using the *filter( )* function. While the data are very recent and rather relevant, the app has to be on for a long time listening to new feeds, and it was hard to terminate the process because if we give it a threshold of how many tweets to extract before termination, it might take hours to stop if the query is very uncommon. Therefore I've decided to go with the searching method instead. 
 
-**Searching**
+***Searching***
 - Searching is much faster and more powerful than streaming, given that we don't require the latest, on-the-go data. With Tweepy's built in support for searching, I could specify how many tweets to search (in our case default = 200), which country to search from, etc. It is easier to manipulate and maintain than its streaming counterpart.
 
 #####Matplotlib#####
@@ -91,10 +91,10 @@ Easytabs provides a quick template to achieving a tab-style paging effect that a
 ###Bugs & Prospects###
 
 #####Easytabs#####
-There are problems with my javascript implementation so that currently clicking on tabs would bring the user to the bottom of the page, instead of switching across contents of different tab containers (hiding current and showing next)
+There are problems with my javascript implementation so that currently clicking on tabs would bring the user to the corresponding section of the page, instead of switching across contents of different tab containers (hiding current and showing next)
 
 #####Interactive Graphs#####
-I could use TweeTINT to plot interactive graphs instead of static PNGs that users can play around and interact with. Supported features are zooming in, highlighting curve, etc. Could also prompt user for an option of what kind of graph to display (Bar, Pie, Line, Dot) 
+With more time, I could have used TweeTINT to plot interactive graphs that users can play around and interact with instead of static PNGs. Supported features are zooming in, highlighting curve, etc. Could also prompt user for an option of what kind of graph to display (Bar, Pie, Line, Dot) 
 
 #####Increased functionalities#####
 
