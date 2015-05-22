@@ -94,7 +94,7 @@ Easytabs provides a quick template to achieving a tab-style paging effect that a
 There are problems with my javascript implementation so that currently clicking on tabs would bring the user to the bottom of the page, instead of switching across contents of different tab containers (hiding current and showing next)
 
 #####Interactive Graphs#####
-I could TweeTINT to plot interactive graphs instead of static PNGs that users can play around and interact with. Supported features are zooming in, highlighting curve, etc. Could also prompt user for an option of what kind of graph to display (Bar, Pie, Line, Dot) 
+I could use TweeTINT to plot interactive graphs instead of static PNGs that users can play around and interact with. Supported features are zooming in, highlighting curve, etc. Could also prompt user for an option of what kind of graph to display (Bar, Pie, Line, Dot) 
 
 #####Increased functionalities#####
 

@@ -62,7 +62,7 @@ def home():
 		auth.set_access_token(access_token, access_token_secret)
 		api = API(auth)
 		#This line filter Twitter Streams to capture data input by user
-		tweets = api.search(q=str(query), count=50)
+		tweets = api.search(q=str(query), count=10)
 		tweet_hash={}
 		# output = open("search_results.txt", "w")
 		scores = []
@@ -80,12 +80,12 @@ def home():
 				pass
 
 			#mining hashtags
-			flash(tweet.entities['hashtags'])
+			# flash(tweet.entities['hashtags'])
 			hashtags = tweet.entities['hashtags']
 
 	        for ht in tweet.entities['hashtags']:                          
 	            if ht != None:
-	                flash(ht[u'text'].encode("utf-8"))
+	                # flash(ht[u'text'].encode("utf-8"))
 	                if ht["text"].encode("utf-8") in tweet_hash.keys(): 
 	                    tweet_hash[ht["text"].encode("utf-8")] += 1
 	                else:
@@ -102,7 +102,7 @@ def home():
 		# Add legend, labels
 		plt.legend(['Sentiment'], loc='best', ncol=1, fontsize=15)    
 
-		axes.set_title("Distribution of sentiment (0=neutral, -1=bad, 1=good)")
+		axes.set_title("(0=neutral, -1=bad, 1=good)")
 		axes.set_xlabel("Sentiment Score")
 		axes.set_ylabel("Occurences")
 		f = tempfile.NamedTemporaryFile(dir='static/temp', suffix='.png',delete=False)
