@@ -49,11 +49,9 @@ To build the web app, a local python app was built first. All features and funct
 #####Twitter Mining####
 Using the REST API
 
-***Streaming*** 
-- I have initially built my app off streaming live data from Twitter pertinent to keyword query using the *filter( )* function. While the data are very recent and rather relevant, the app has to be on for a long time listening to new feeds, and it was hard to terminate the process because if we give it a threshold of how many tweets to extract before termination, it might take hours to stop if the query is very uncommon. Therefore I've decided to go with the searching method instead. 
+***Streaming*** - I have initially built my app off streaming live data from Twitter pertinent to keyword query using the *filter( )* function. While the data are very recent and rather relevant, the app has to be on for a long time listening to new feeds, and it was hard to terminate the process because if we give it a threshold of how many tweets to extract before termination, it might take hours to stop if the query is very uncommon. Therefore I've decided to go with the searching method instead. 
 
-***Searching***
-- Searching is much faster and more powerful than streaming, given that we don't require the latest, on-the-go data. With Tweepy's built in support for searching, I could specify how many tweets to search (in our case default = 200), which country to search from, etc. It is easier to manipulate and maintain than its streaming counterpart.
+***Searching*** - Searching is much faster and more powerful than streaming, given that we don't require the latest, on-the-go data. With Tweepy's built in support for searching, I could specify how many tweets to search (in our case default = 200), which country to search from, etc. It is easier to manipulate and maintain than its streaming counterpart.
 
 #####Matplotlib#####
 Matplotlib is a MATLAB-like graphplotting library that allows me to plot different kinds of graphs (in our case a histogram) and export it as a PNG so I could render it on HTML webpages. There are actually other fancier ways to implement an interactive graph rendition through other libraries, but due to time constraint I've left it in the exploration section. 

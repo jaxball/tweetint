@@ -57,6 +57,11 @@ def home():
 	tweet_hash={}
 	if request.method == 'POST':
 		query = request.form['keyword'] 
+		query2 = request.form['fetchcount']
+		fetchcount = int(query2)
+		# debug
+		print fetchcount
+		
 		keyword = query
 		auth = OAuthHandler(consumer_key, consumer_secret)
 		auth.set_access_token(access_token, access_token_secret)

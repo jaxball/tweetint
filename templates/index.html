@@ -38,9 +38,12 @@
           <input type="text" placeholder="Enter Keyword Here..." name="keyword" value="{{request.form.keyword }}">
           <input class="btn btn-default" type="submit" value="Search">
         </form>
+        <form action="" method="post">
+          <input type="text" placeholder="Enter fetch count" name="fetchcount" value="{{request.form.fetchcount }}">
+        </form>
         <br><br>
 
-        <h3>You searched for: {{ keyword }}</h3>
+        <h3>You searched for: {{ keyword }} {{ fetchcount }}</h3>
 
         <div id="twitter-bootstrap-container">
           <div id="twitter-bootstrap-tabs" data-easytabs="true">
@@ -56,6 +59,7 @@
 
           <div class="panels">
             <div id="tweet-text" >
+              <h3>Tweets related to {{ keyword }}</h3>
               {% for tweet in tweet_content %}
                 {{ tweet.text }} <br>
                 <strong>Date:</strong> {{ tweet.date }} <br>
