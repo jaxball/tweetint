@@ -60,15 +60,14 @@ def home():
 		query2 = request.form['fetchcount']
 		fetchcount = int(query2)
 		# debug
-		print fetchcount
-		flash(fetchcount)
-		
+		# print fetchcount
+
 		keyword = query
 		auth = OAuthHandler(consumer_key, consumer_secret)
 		auth.set_access_token(access_token, access_token_secret)
 		api = API(auth)
 		#This line filter Twitter Streams to capture data input by user
-		tweets = api.search(q=str(query), count=15)
+		tweets = api.search(q=str(query), count=int(query2))
 		tweet_hash={}
 		# output = open("search_results.txt", "w")
 		scores = []
