@@ -61,6 +61,7 @@ def home():
 		fetchcount = int(query2)
 		# debug
 		print fetchcount
+		flash(fetchcount)
 		
 		keyword = query
 		auth = OAuthHandler(consumer_key, consumer_secret)
