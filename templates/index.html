@@ -35,8 +35,8 @@
         <p>Your login was successful. Click <a href="/logout">here</a> to logout.</p>
         <br><br>
         <form action="" method="post">
-          <input type="text" placeholder="Enter Keyword Here..." name="keyword" value="{{request.form.keyword }}">
-          <input type="text" placeholder="Enter fetch count" name="fetchcount" value="{{request.form.fetchcount }}">
+          <input type="text" placeholder="Enter Keyword Here..." name="keyword" value="{{request.form.keyword }}" required>
+          <input type="text" placeholder="Enter fetch count" name="fetchcount" value="{{request.form.fetchcount }}" required>
           <input class="btn btn-default" type="submit" value="Search">
         </form>
         <br><br>
