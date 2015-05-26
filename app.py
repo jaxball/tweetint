@@ -32,7 +32,6 @@ app = Flask(__name__)
 
 #need a secret key for sessions to work properly
 app.secret_key = "my precious"
-# app.database = "sample.db"
 
 # login required decorator
 def login_required(f):
@@ -58,7 +57,6 @@ def home():
 	if request.method == 'POST':
 		query = request.form['keyword'] 
 		query2 = request.form['fetchcount']
-		fetchcount = int(query2)
 		# debug
 		# print fetchcount
 
@@ -106,10 +104,10 @@ def home():
 
 		# Add legend, labels
 		plt.legend(['Sentiment'], loc='best', ncol=1, fontsize=15)    
-
 		axes.set_title("(0=neutral, -1=bad, 1=good)")
 		axes.set_xlabel("Sentiment Score")
 		axes.set_ylabel("Occurences")
+		#designating a temp directory to store the PNG grpah plot to be displayed
 		f = tempfile.NamedTemporaryFile(dir='static/temp', suffix='.png',delete=False)
 		plt.savefig(f)
 		f.close()
@@ -119,10 +117,13 @@ def home():
 		
 		#generates statistical figures to be displayed on the website
 		tweet_content = [dict(text=tweet.text, date = tweet.created_at) for tweet in tweets]
+		#Finding the most positive tweet from the map of sentiments to tweets
 		positive_score = max(sentiscore.keys())
 		positive_tweet = sentiscore[positive_score]
-		negative_score = min(sentiscore.keys())
+		#Filtering the negatives and finding the most negative
+		negative_score = max([x for x in sentiscore.keys() if float(x)<0])
 		negative_tweet = sentiscore[negative_score]
+
 		return render_template('index.html', tweet_content = tweet_content, keyword=keyword, json01=json01, hash_frequency=hash_frequency, plotPng=plotPng, positive_score=positive_score, negative_score=negative_score, positive_tweet=positive_tweet, negative_tweet=negative_tweet)
 	else:
 		plotPng = 'graph_empty.png'
@@ -145,6 +146,7 @@ def login():
 			return redirect(url_for('home'))
 	return render_template('login.html',error=error)
 
+#logout screen - needed to be logged in to display, looks for a session token, else reroutes
 @app.route('/logout')
 @login_required
 def logout():

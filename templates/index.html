@@ -36,7 +36,7 @@
         <br><br>
         <form action="" method="post">
           <input type="text" placeholder="Enter Keyword Here..." name="keyword" value="{{request.form.keyword }}" required>
-          <input type="text" placeholder="Enter fetch count" name="fetchcount" value="{{request.form.fetchcount }}" required>
+          <input type="number" placeholder="Enter search quantity" min="5" name="fetchcount" value="{{request.form.fetchcount }}" pattern="\d+" required>
           <input class="btn btn-default" type="submit" value="Search">
         </form>
         <br><br>
