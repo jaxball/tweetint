@@ -1,5 +1,5 @@
 ## TweeTINT! 
-A project for TINT, the no.1 company in listening to users' feedback and needs
+A project for TINT, the company that listens to users' feedback and needs
 
 - **Author**: Jason Lin
 - **Languages used**: Python, HTML/CSS, Javascript 
@@ -33,9 +33,9 @@ A project for TINT, the no.1 company in listening to users' feedback and needs
 
 **Frameworks & Libraries**
 
-Because the app involves extracting large amounts of data from Twitter and processing them through an external NLP engine, I've written the backbones of the webapp in Python and port it to an HTML via Heroku using a Python framework called Flask. 
+Because the app involves extracting large amounts of data from Twitter and processing them through an external NLP engine, I've written the backbones of the webapp in Python and ported it to an HTML via Heroku using a Python framework called **Flask**. 
 
-To build the web app, a local python app was built first. All features and functionalities, including graphing a chart, were tested locally in the native python environment. To help mine data from Twitter, I've imported the **Tweepy** library for python. The graphing part involved libraries **Pandas** & **Matplotlib**. Last but not least, my sentiment analysis feature is based on **AlchemyAPI**'s wonderful natural language processing engine. Credits to them for granting me a student account that allows me to process extra queries per day.
+To build the web app, a local python app was programmed first. All features and functionalities, including graphing a chart, were tested locally in the native python environment. To help mine data from Twitter, I've imported the **Tweepy** library for python. The graphing part involved libraries **Pandas** & **Matplotlib**. Last but not least, my sentiment analysis feature is based on **AlchemyAPI**'s wonderful natural language processing engine. Credits to them for granting me a student account that allows me to process extra queries per day.
 
 ###Backend###
 
