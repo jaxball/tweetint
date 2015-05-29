@@ -93,7 +93,7 @@
             <div id="ht-frequency" >
               <h3>HashTag Frequency</h3>
                 {%  for ht in cleanHashTags %}
-                  <strong>#</strong>{{ht[0]}} <span> - </span> 
+                  <strong>#</strong>{{ht[0].decode("utf-8")}} <span> - </span> 
                   <strong>{{ht[1]}}</strong>
                   <br>
                 {% endfor %}
