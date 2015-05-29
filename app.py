@@ -68,11 +68,13 @@ def home():
 		tweets = api.search(q=str(query), count=int(query2))
 		tweet_hash={}
 		# output = open("search_results.txt", "w")
+		#Initialize some variables to be used later
 		scores = []
 		sentiscore = {}
+		cleanHashTags = []
 		#initialize up matplot
 		fig = plt.figure(dpi=200)
- 		axes = fig.add_subplot(1,1,1)
+		axes = fig.add_subplot(1,1,1)
 		for tweet in tweets:
 			sentiment = ALCAPI.sentiment('text', tweet.text)
 			try:
@@ -85,17 +87,18 @@ def home():
 			#mining hashtags
 			# flash(tweet.entities['hashtags'])
 			hashtags = tweet.entities['hashtags']
+			flash (len(hashtags))
 
-	        for ht in tweet.entities['hashtags']:                          
-	            if ht != None:
-	                # flash(ht[u'text'].encode("utf-8"))
-	                if ht["text"].encode("utf-8") in tweet_hash.keys(): 
-	                    tweet_hash[ht["text"].encode("utf-8")] += 1
-	                else:
-	                  tweet_hash[ht["text"].encode("utf-8")] = 1
-	     
-	        sortedHashTags = dict(sorted(tweet_hash.items(), key=operator.itemgetter(1), reverse=True)[:10]) 
-	        hash_frequency = sorted(sortedHashTags.items(), key=lambda kv: (kv[1],kv[0]),reverse=True)
+			for ht in hashtags:       
+				if (ht != None):
+					if ht["text"].encode("utf-8") in tweet_hash.keys(): 
+						tweet_hash[ht["text"].encode("utf-8")] += 1
+					else:
+					  tweet_hash[ht["text"].encode("utf-8")] = 1
+		 
+			sortedHashTags = dict(sorted(tweet_hash.items(), reverse=True)[:10]) 
+			# hash_frequency = sorted(sortedHashTags.items(), key=lambda kv: (kv[1],kv[0]),reverse=True)
+			# cleanHashTags = sorted(sortedHashTags.items(), key=lambda kv: (kv[1],kv[0]),reverse=True)
 
 		# Lock x-range, scale y by 5% padding
 		axes.set_xlim(-1, 1)
@@ -114,6 +117,10 @@ def home():
 		plotPng = f.name.split('/')[-1]
 
 		json01 = json.dumps(mpld3.fig_to_dict(plt.figure(1)))
+
+
+		# Area for hashtags:
+		cleanHashTags = sorted(sortedHashTags.items(), key=lambda kv: (kv[1],kv[0]),reverse=True)		
 		
 		#generates statistical figures to be displayed on the website
 		tweet_content = [dict(text=tweet.text, date = tweet.created_at) for tweet in tweets]
@@ -124,7 +131,9 @@ def home():
 		negative_score = max([x for x in sentiscore.keys() if float(x)<0])
 		negative_tweet = sentiscore[negative_score]
 
-		return render_template('index.html', tweet_content = tweet_content, keyword=keyword, json01=json01, hash_frequency=hash_frequency, plotPng=plotPng, positive_score=positive_score, negative_score=negative_score, positive_tweet=positive_tweet, negative_tweet=negative_tweet)
+		return render_template('index.html', tweet_content = tweet_content, keyword=keyword, json01=json01, \
+			 plotPng=plotPng, positive_score=positive_score, negative_score=negative_score, \
+			positive_tweet=positive_tweet, negative_tweet=negative_tweet, cleanHashTags=cleanHashTags)
 	else:
 		plotPng = 'graph_empty.png'
 		return render_template('index.html', keyword=keyword, json01=json01, plotPng=plotPng)

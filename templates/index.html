@@ -14,19 +14,19 @@
   <body>
 
     <div class="container">
-      <!-- {% extends "base.html" %} -->
       {% block content %}
         <div id="loading">
           <img id="loading-image" src="static/ajax-loader.gif" alt="Loading..."/>
         </div>
+        
+        <!-- CSS for loading background -->
         <style>
-
-        div #menu
-        {
-          border:2px solid #a1a1a1;
-          padding:10px 20px; 
-          border-radius:15px;
-        }
+          div #menu
+          {
+            border:2px solid #a1a1a1;
+            padding:10px 20px; 
+            border-radius:15px;
+          }
         </style>
 
         <h1>Welcome to TweeTINT!</h2>
@@ -43,6 +43,7 @@
 
         <h3>You searched for: {{ keyword }} {{ fetchcount }}</h3>
 
+        <!-- Tabbed contianers for different categories of infos -->
         <div id="twitter-bootstrap-container">
           <div id="twitter-bootstrap-tabs" data-easytabs="true">
             <ul class="nav nav-tabs">
@@ -91,9 +92,9 @@
 
             <div id="ht-frequency" >
               <h3>HashTag Frequency</h3>
-                {%  for hashtag in hash_frequency %}
-                  <strong>#</strong>{{hashtag[0]}} <span> - </span> 
-                  <strong>{{hashtag[1]}}</strong>
+                {%  for ht in cleanHashTags %}
+                  <strong>#</strong>{{ht[0]}} <span> - </span> 
+                  <strong>{{ht[1]}}</strong>
                   <br>
                 {% endfor %}
               <br>
@@ -117,9 +118,7 @@
             $('#loading').hide();
           });
         </script>
-
       {% endblock %}
-
     </div>
 
   </body>
