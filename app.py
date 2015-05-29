@@ -138,7 +138,7 @@ def login():
 			return redirect(url_for('home'))
 	return render_template('login.html',error=error)
 
-#logout screen - needed to be logged in to display, looks for a session token, else reroutes
+# Logout screen - needed to be logged in to display, looks for a session token, else reroutes
 @app.route('/logout')
 @login_required
 def logout():

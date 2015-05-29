@@ -74,17 +74,24 @@ AlchemyAPI is a very powerful cloud Artifical Intelligence engine that supports 
 		> jquery.easytabs.js
 		> tabs.css
 		> loader.gif
+		> ajax-loader.gif
 
 #####Flask#####
 Flask is a Python framework that encapsulates the processes and procedures for hosting HTML content from python programs as well as making HTML requests that respond with feedback. It is the primary framework I used to port the app online.
 
 A popular alternative to Flask is **Django** which has been used industry wide for its performance and design. I did not go with it however because Django demands the user to stick with its fundamental template structure, which could sometimes result in a steeper learning curve. Flask gives you a lot more freedom and although its performance may not be as good as Django's, for a webapp like TweeTINT it is more than enough. 
 
+######Jinja 2######
+To go with the Flask framework I've written code adapted to the Jinja 2 framework. HTML templating, inclusion of JQuery, etc. adheres to the DRY principal (Don't repeat yourself).
+
 #####Heroku#####
 Instead of using AWS, I've decided to go with Heroku because of its easy-to-use and dedicated user experience.  It is also more cost efficient and saves a lot of hassle for setting up a new server, making it ideal for TweeTINT.
 
 #####Easytabs#####
 Easytabs provides a convenient template to achieve a tab-style paging effect that allows different pages of content to be displayed on one single page. I attempted to incorporated that in TweeTINT so that different kinds of content are separated from each other and the page won't scroll down for too long.
+
+#####Input Validation#####
+I've updated the *index.html* to support HTML5 style input validation. However, not every browser supports/has it turned on by default, and after some testing the validation is found to be working best under Chrome. 
 
 ###Bugs & Prospects###
 
