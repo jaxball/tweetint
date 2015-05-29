@@ -4,33 +4,28 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 from tweepy import API
 import sys
-import StringIO
-import time
-import datetime
 import operator
 import pandas as pd
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import mpld3
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import tempfile
-import json
 from alchemyapi import AlchemyAPI as alcapi
 ALCAPI = alcapi() 
 
-#Variables that contains the user credentials to access Twitter API 
+# Variables that contains the user credentials to access Twitter API 
 access_token = "2227514784-PjNqLJUg9XpIT5uK23kV3dpfmLukw6SSngWc8Hw"
 access_token_secret = "bI4p291ESFX1JvnfFMbHQQ9ZucW1IpIe2W7Gr4vPkwWA1"
 consumer_key = "CAZcVS4kqiJfejb7CtimhBjqI"
 consumer_secret = "rxluqu7wZT5lWAEVRJbYlhGOsrcqyVKVAiR0yMyQwOh9Izmcl8"
 
-#create the application object
+# Create the application object
 app = Flask(__name__)
 
-#need a secret key for sessions to work properly
+# Need a secret key for sessions to work properly
 app.secret_key = "my precious"
 
 # login required decorator
@@ -44,7 +39,7 @@ def login_required(f):
 			return redirect(url_for('login'))
 	return wrap
 
-#using decorators to link the function to a url
+# Ssing decorators to link the function to a url
 @app.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
@@ -52,30 +47,31 @@ def home():
 	tweets = {}
 	keyword = ""
 	bins=np.histogram(np.hstack((-1,1)), bins=20)[1]
-	json01=None
 	tweet_hash={}
-	if request.method == 'POST':
-		query = request.form['keyword'] 
-		query2 = request.form['fetchcount']
-		# debug
-		# print fetchcount
 
-		keyword = query
+	if request.method == 'POST':
+		# Setting up API authentication
 		auth = OAuthHandler(consumer_key, consumer_secret)
 		auth.set_access_token(access_token, access_token_secret)
 		api = API(auth)
-		#This line filter Twitter Streams to capture data input by user
+
+		# Requests HTML user input and performs search
+		query = request.form['keyword'] 
+		query2 = request.form['fetchcount']
 		tweets = api.search(q=str(query), count=int(query2))
+		
+		# Initialize some variables to be used later 
 		tweet_hash={}
-		# output = open("search_results.txt", "w")
-		#Initialize some variables to be used later
 		scores = []
 		sentiscore = {}
 		cleanHashTags = []
-		#initialize up matplot
+
+		# Initialize matplot
 		fig = plt.figure(dpi=200)
 		axes = fig.add_subplot(1,1,1)
+
 		for tweet in tweets:
+			# Data exchange with the NLP engine
 			sentiment = ALCAPI.sentiment('text', tweet.text)
 			try:
 				scores.append(sentiment['docSentiment']['score'])
@@ -85,11 +81,7 @@ def home():
 				pass
 
 			#mining hashtags
-			# flash(tweet.entities['hashtags'])
-			hashtags = tweet.entities['hashtags']
-			flash (len(hashtags))
-
-			for ht in hashtags:       
+			for ht in tweet.entities['hashtags']:       
 				if (ht != None):
 					if ht["text"].encode("utf-8") in tweet_hash.keys(): 
 						tweet_hash[ht["text"].encode("utf-8")] += 1
@@ -97,8 +89,6 @@ def home():
 					  tweet_hash[ht["text"].encode("utf-8")] = 1
 		 
 			sortedHashTags = dict(sorted(tweet_hash.items(), reverse=True)[:10]) 
-			# hash_frequency = sorted(sortedHashTags.items(), key=lambda kv: (kv[1],kv[0]),reverse=True)
-			# cleanHashTags = sorted(sortedHashTags.items(), key=lambda kv: (kv[1],kv[0]),reverse=True)
 
 		# Lock x-range, scale y by 5% padding
 		axes.set_xlim(-1, 1)
@@ -110,39 +100,33 @@ def home():
 		axes.set_title("(0=neutral, -1=bad, 1=good)")
 		axes.set_xlabel("Sentiment Score")
 		axes.set_ylabel("Occurences")
-		#designating a temp directory to store the PNG grpah plot to be displayed
+
+		# Designating a temp directory to store grpah as PNG
 		f = tempfile.NamedTemporaryFile(dir='static/temp', suffix='.png',delete=False)
 		plt.savefig(f)
 		f.close()
 		plotPng = f.name.split('/')[-1]
 
-		json01 = json.dumps(mpld3.fig_to_dict(plt.figure(1)))
-
-
-		# Area for hashtags:
+		# Finalizes figures and statistics to be rendered on HTML
 		cleanHashTags = sorted(sortedHashTags.items(), key=lambda kv: (kv[1],kv[0]),reverse=True)		
-		
-		#generates statistical figures to be displayed on the website
 		tweet_content = [dict(text=tweet.text, date = tweet.created_at) for tweet in tweets]
-		#Finding the most positive tweet from the map of sentiments to tweets
 		positive_score = max(sentiscore.keys())
 		positive_tweet = sentiscore[positive_score]
-		#Filtering the negatives and finding the most negative
 		negative_score = max([x for x in sentiscore.keys() if float(x)<0])
 		negative_tweet = sentiscore[negative_score]
 
-		return render_template('index.html', tweet_content = tweet_content, keyword=keyword, json01=json01, \
+		return render_template('index.html', tweet_content = tweet_content, keyword=keyword, \
 			 plotPng=plotPng, positive_score=positive_score, negative_score=negative_score, \
 			positive_tweet=positive_tweet, negative_tweet=negative_tweet, cleanHashTags=cleanHashTags)
 	else:
 		plotPng = 'graph_empty.png'
-		return render_template('index.html', keyword=keyword, json01=json01, plotPng=plotPng)
+		return render_template('index.html', keyword=keyword, plotPng=plotPng)
 
 @app.route('/welcome')
 def welcome():
 	return render_template("welcome.html")
 
-#by default flask assumes a GET request
+# By default flask assumes a GET request
 @app.route('/login', methods=['GET', 'POST']) 
 def login():
 	error = None
@@ -151,7 +135,6 @@ def login():
 			error = 'Invalid credentials. Please try again.'
 		else:
 			session['logged_in'] = True
-			# flash('Login successful!')
 			return redirect(url_for('home'))
 	return render_template('login.html',error=error)
 
@@ -159,6 +142,7 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
+	# Checks for session token
 	session.pop('logged_in', None)
 	flash('You were just logged out.')
 	return redirect(url_for('welcome'))
