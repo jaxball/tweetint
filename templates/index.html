@@ -14,7 +14,9 @@
   <body>
 
     <div class="container">
+      <!-- Inherits templated code from base.html -->
       {% block content %}
+
         <div id="loading">
           <img id="loading-image" src="static/ajax-loader.gif" alt="Loading..."/>
         </div>
@@ -100,13 +102,10 @@
               <br>
             </div>
 
-            <div id="tweet-locale" >
-              <h3>Country</h3>
-              <p>Underconstruction</p>
-            </div>
           </div>
         </div>
 
+        <!-- Javascript inclusions -->
         <script type="text/javascript">
           $(document).ready( function() {
             $('#twitter-bootstrap-tabs').easytabs();
@@ -118,7 +117,9 @@
             $('#loading').hide();
           });
         </script>
+
       {% endblock %}
+
     </div>
 
   </body>

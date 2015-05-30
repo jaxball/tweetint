@@ -83,6 +83,7 @@ span.prev-tab, span.next-tab { background: #ccc; }
   text-align: center;
 }
 
+/* Styles for Loading GIF */
 #loading-image {
   position: absolute;
   top: 100px;

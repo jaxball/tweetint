@@ -65,7 +65,7 @@ def home():
 		scores = []
 		sentiscore = {}
 		cleanHashTags = []
-
+		
 		# Initialize matplot
 		fig = plt.figure(dpi=200)
 		axes = fig.add_subplot(1,1,1)
@@ -80,7 +80,7 @@ def home():
 			except KeyError:
 				pass
 
-			#mining hashtags
+			# Mining hashtags
 			for ht in tweet.entities['hashtags']:       
 				if (ht != None):
 					if ht["text"].encode("utf-8") in tweet_hash.keys(): 

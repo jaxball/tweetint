@@ -7,9 +7,7 @@
   </head>
 
   <body>
-
     <div class="container">
-
       <!-- child template -->
       {% block content %}{% endblock %}
 
@@ -21,8 +19,8 @@
       <!-- messages -->
       {% for message in get_flashed_messages() %}
         {{ message }}
+
       {% endfor %}
     </div>
-
   </body>
 </html>
