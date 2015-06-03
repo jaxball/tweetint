@@ -2,7 +2,7 @@
 A project for TINT, the company that listens to users' feedback and needs
 
 - **Author**: Jason Lin
-- **Languages used**: Python, HTML/CSS, Javascript 
+- **Languages used**: Python, HTML/CSS, Javascript, JSON
 - **Website**: tweetweb.herokuapp.com
 
 ###Code Organization###
