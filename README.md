@@ -2,7 +2,7 @@
 A project for TINT, the company that listens to users' feedback and needs
 
 - **Author**: Jason Lin
-- **Languages used**: Python, HTML/CSS, Javascript 
+- **Languages used**: Python, HTML/CSS, Javascript, JSON
 - **Website**: tweetweb.herokuapp.com
 - **Latest update**: Jun 07 2015 11:05AM PDT - supports animated tab-switching now.
 
