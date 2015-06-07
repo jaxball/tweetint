@@ -67,6 +67,41 @@ span.prev-tab, span.next-tab { background: #ccc; }
 .prev-tab { float: left; }
 .next-tab { float: right; }
 
+/*.tabs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tabs li {
+  display: inline-block;
+}*/
+
+/*.tabs a {
+  background: #fff;
+  color: #4099FF;
+  border-radius: 3px 3px 0 0;
+  display: block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+}*/
+
+/*.tabs a:hover {
+  background: #EEEEEE;
+}
+*/
+/* Styles for FadeIn/Out Tabs */
+.nav-tabs a.active {
+  background: #fff
+  color: black;
+}
+
+.tab {
+  background: #fff;
+  border: solid transparent;
+  padding: 1px;
+}
+
 /* Styles for Twitter Boostrap */
 #twitter-bootstrap-container { background: #fff; padding: 10px; height: 75px; margin-bottom: 15px; }
 
