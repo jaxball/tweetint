@@ -45,7 +45,7 @@ def login_required(f):
 def home():
 	
 	tweets = {}
-	keyword = ""
+	keyword = "(empty input)"
 	bins=np.histogram(np.hstack((-1,1)), bins=20)[1]
 	tweet_hash={}
 
@@ -56,7 +56,7 @@ def home():
 		api = API(auth)
 
 		# Requests HTML user input and performs search
-		query = request.form['keyword'] 
+		keyword = query = request.form['keyword'] 
 		query2 = request.form['fetchcount']
 		tweets = api.search(q=str(query), count=int(query2))
 		
@@ -65,7 +65,7 @@ def home():
 		scores = []
 		sentiscore = {}
 		cleanHashTags = []
-		
+
 		# Initialize matplot
 		fig = plt.figure(dpi=200)
 		axes = fig.add_subplot(1,1,1)

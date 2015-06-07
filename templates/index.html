@@ -9,6 +9,7 @@
     <script type='text/javascript' src='../static/jquery.hashchange.min.js'></script>
     <script type='text/javascript' src='../static/jquery.easytabs.min.js'></script>
     <script type='text/javascript' src='../static/jquery-1.7.1.min.js'></script>
+
   </head>
 
   <body>
@@ -31,53 +32,54 @@
           }
         </style>
 
+        <p style="float: right; padding-top: 2vh">Click <a href="/logout">here</a> to logout.</p>
         <h1>Welcome to TweeTINT!</h2>
         <p>TweeTINT - A twitter sentiment analysis webapp</p>
         <br>
-        <p>Your login was successful. Click <a href="/logout">here</a> to logout.</p>
-        <br><br>
+        
         <form action="" method="post">
-          <input type="text" placeholder="Enter Keyword Here..." name="keyword" value="{{request.form.keyword }}" required>
+          <input type="text" placeholder="Enter keyword Here..." name="keyword" value="{{request.form.keyword }}" required>
           <input type="number" placeholder="Enter search quantity" min="5" name="fetchcount" value="{{request.form.fetchcount }}" pattern="\d+" required>
           <input class="btn btn-default" type="submit" value="Search">
         </form>
-        <br><br>
+        <br>
 
-        <h3>You searched for: {{ keyword }} {{ fetchcount }}</h3>
+        <h3>You searched for: <span style="color: #999999"> {{ keyword }} {{ fetchcount }} </span></h3>
 
         <!-- Tabbed contianers for different categories of infos -->
         <div id="twitter-bootstrap-container">
-          <div id="twitter-bootstrap-tabs" data-easytabs="true">
+          <div id="twitter-bootstrap-tabs">
+            <!-- <ul class="nav nav-tabs"> -->
             <ul class="nav nav-tabs">
          
-              <li class="active"><a href="#tweet-text">Home</a></li>
-              <li class="inactive"><a href="#tweet-sentiment">Sentiment</a></li>
-              <li class="inactive"><a href="#sentiment-rank">Rankings</a></li>
-              <li class="inactive"><a href="#ht-frequency">Hashtag Freq.</a></li>
-              <li class="inactive"><a href="#tweet-locale">Country</a></li>
+              <li><a href="#tweet-text">Home</a></li>
+              <li><a href="#tweet-sentiment">Sentiment</a></li>
+              <li><a href="#sentiment-rank">Rankings</a></li>
+              <li><a href="#ht-frequency">Hashtag Freq.</a></li>
+              <li><a href="#tweet-locale">Country</a></li>
             </ul>
           </div>
 
           <div class="panels">
-            <div id="tweet-text" >
-              <h3>Tweets related to {{ keyword }}</h3>
+            <div class="tab" id="tweet-text" >
+              <h3>Tweets related to <span style="color: #999999"> {{ keyword }} </span></h3>
               {% for tweet in tweet_content %}
                 {{ tweet.text }} <br>
                 <strong>Date:</strong> {{ tweet.date }} <br>
                 <br>
               {% endfor %}
-              <br>
+              <br><br>
             </div>
         
-            <div id="tweet-sentiment" >
+            <div class="tab" id="tweet-sentiment" >
               <div class='matplotlib'>
                 <h3>Sentiment Distribution</h3>
                 <img src="static/temp/{{plotPng}}">
-                <br><br>
+                <br><br><br>
               </div>
             </div>
 
-            <div id="sentiment-rank" >
+            <div class="tab" id="sentiment-rank" >
               <h3>Most Positive/Negative Tweet</h3>
                 <p>
                   <strong>Most +ve Tweet: </strong>{{positive_tweet}}
@@ -92,8 +94,8 @@
               <br>
             </div>
 
-            <div id="ht-frequency" >
-              <h3>HashTag Frequency</h3>
+            <div class="tab" id="ht-frequency" >
+              <h3># Frequency</h3>
                 {%  for ht in cleanHashTags %}
                   <strong>#</strong>{{ht[0].decode("utf-8")}} <span> - </span> 
                   <strong>{{ht[1]}}</strong>
@@ -117,6 +119,8 @@
             $('#loading').hide();
           });
         </script>
+
+        <script src="static/scripts.js"></script>
 
       {% endblock %}
 
