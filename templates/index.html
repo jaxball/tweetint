@@ -32,7 +32,7 @@
           }
         </style>
 
-        <p style="float: right; padding-top: 2vh">Click <a href="/logout">here</a> to logout.</p>
+        <p style="float: right; padding-top: 2vh">Click <a href="/logout">here</a> to logout. </p>
         <h1>Welcome to TweeTINT!</h2>
         <p>TweeTINT - A twitter sentiment analysis webapp</p>
         <br>
@@ -63,12 +63,18 @@
           <div class="panels">
             <div class="tab" id="tweet-text" >
               <h3>Tweets related to <span style="color: #999999"> {{ keyword }} </span></h3>
-              {% for tweet in tweet_content %}
-                {{ tweet.text }} <br>
-                <strong>Date:</strong> {{ tweet.date }} <br>
-                <br>
-              {% endfor %}
-              <br><br>
+              <div class = "list-group">
+                {% for tweet in tweet_content %}
+                  <a href="/" class="list-group-item container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
+                    
+                    <p class = "list-group-item-text">{{ tweet.text }}<br>
+                    <strong>Date:</strong> {{ tweet.date }} </p>
+                    
+                  </a>
+                {% endfor %}
+              </div>
+              <a href = "#" >Back to top</a> 
+              <br>
             </div>
         
             <div class="tab" id="tweet-sentiment" >
@@ -105,6 +111,7 @@
             </div>
 
           </div>
+          <span style = "float: right">created by: Jason Lin </span>
         </div>
 
         <!-- Javascript inclusions -->
