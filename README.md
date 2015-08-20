@@ -1,5 +1,5 @@
 ## TweeTINT! 
-A project for TINT, the company that listens to users' feedback and needs
+TweeTINT' is a Twitter sentiment analysis webapp that takes in search queries provided by the user and searches for a designated number of related twitter feeds using Twitter's REST API. It then performs natural language processing on them using a Python NLP engine and graphs a bar chart visualization of the sentiment scores collected on the webpage. Other features such as tweet locale and country sent from will be implemented over time.
 
 - **Author**: Jason Lin
 - **Languages used**: Python, HTML/CSS, Javascript, JSON
